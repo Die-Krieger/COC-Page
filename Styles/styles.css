@@ -167,6 +167,40 @@ header {
     transform: translateX(0);
 }
 
+/* Social header styling */
+.social-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.social-icon {
+    width: auto; /* Änderung von fester Breite zu auto */
+    height: 32px; /* Nur Höhe definieren, Breite wird proportional angepasst */
+    transition: transform 0.3s ease;
+    border-radius: 0;
+    filter: none;
+    opacity: 1;
+    object-fit: contain; /* Sorgt dafür, dass das Bild sein Seitenverhältnis behält */
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+    /* Keine Filter oder andere Effekte, nur eine leichte Bewegung nach oben */
+}
+
+/* Make sure the social header is responsive */
+@media (max-width: 768px) {
+    .social-header {
+        margin-top: 15px;
+    }
+    
+    .social-icon {
+        height: 28px; /* Nur Höhe anpassen für mobile Ansicht */
+        width: auto;
+    }
+}
+
 /* Navigation Styling - Modern and animated */
 .main-nav {
     margin-top: 20px;
