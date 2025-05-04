@@ -1036,3 +1036,54 @@ nav ul li::before {
         display: inline-block;
     }
 }
+
+/* Fix for footer links to remain visible after being clicked (visited state) */
+.footer-content a,
+.footer-content a:visited,
+.social-links a,
+.social-links a:visited,
+.footer-links a,
+.footer-links a:visited {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.footer-links {
+    margin-top: 15px;
+}
+
+.footer-links a {
+    color: var(--accent-color);
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.footer-links a:visited {
+    color: var(--accent-color); /* Keep visited links the same color */
+}
+
+.footer-links a:hover {
+    color: #fff;
+    background: rgba(0, 217, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+    box-shadow: 0 0 5px var(--accent-color);
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
