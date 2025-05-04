@@ -74,6 +74,10 @@
     transition: all var(--transition-speed) ease;
 }
 
+html {
+    scroll-behavior: smooth; /* Enable smooth scrolling for the entire page */
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background: var(--bg-primary);
@@ -82,11 +86,12 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     min-height: 100vh;
+    background-attachment: fixed;
     overflow-x: hidden; /* Prevent horizontal overflow */
-    /* Remove background-attachment: fixed as it causes flickering on mobile */
-    /* Add hardware acceleration to prevent flickering */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Fix for mobile scrolling performance */
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Container Styling */
@@ -94,35 +99,6 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-}
-
-/* Add a media query to disable gradient animation on mobile devices */
-@media (max-width: 768px) {
-    body {
-        /* Replace animated gradient with static gradient on mobile */
-        animation: none;
-        background-attachment: scroll;
-        background-size: auto;
-    }
-    
-    /* Improve mobile rendering performance */
-    .glass-card, 
-    .clan-logo,
-    .hero,
-    header,
-    footer {
-        will-change: transform;
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-    }
-    
-    /* Reduce effects intensity on mobile */
-    .glass-card::before,
-    .glass-card::after,
-    .hero::before,
-    .clan-logo::before {
-        opacity: 0.5;
-    }
 }
 
 /* Header Styling - Updated with futuristic elements */
@@ -1028,6 +1004,42 @@ nav ul li::before {
     
     .glass-card h3 {
         font-size: 18px;
+    }
+    
+    body {
+        /* Replace animated gradient with static gradient on mobile */
+        animation: none;
+        background-attachment: scroll;
+        background-size: auto;
+    }
+    
+    /* Improve mobile rendering performance with will-change */
+    .glass-card, 
+    .clan-logo,
+    .hero,
+    header,
+    footer,
+    main,
+    section {
+        will-change: transform;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+    }
+    
+    /* Explicitly turn off smooth scrolling on mobile if it causes issues */
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+    }
+    
+    /* Reduce effects intensity on mobile */
+    .glass-card::before,
+    .glass-card::after,
+    .hero::before,
+    .clan-logo::before {
+        opacity: 0.5;
     }
 }
 
